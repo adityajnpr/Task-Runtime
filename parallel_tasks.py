@@ -4,8 +4,45 @@ import time
 from collections import defaultdict, deque
 import pprint
 
+# Attribution: https://www.geeksforgeeks.org/dsa/topological-sorting-indegree-based-solution/
 def toposort_tasks(tasks):
-	return(100)
+
+    in_degree = {name: 0 for name in tasks}
+    graph = defaultdict(list)
+    runtime = {name: 0 for name in tasks}
+
+    # Build dependency graph and in-degree count
+    for name, task in tasks.items():
+        for dep in task["dependencies"]:
+            if dep not in tasks:
+                raise ValueError(f"Task '{name}' has undefined dependency '{dep}'")
+            graph[dep].append(name)
+            in_degree[name] += 1
+
+    # Start with tasks that have no dependencies
+    queue = deque([name for name in tasks if in_degree[name] == 0])
+    for name in queue:
+        runtime[name] = tasks[name]["duration"]
+
+    processed = 0
+
+    while queue:
+        current = queue.popleft()
+        processed += 1
+
+        for neighbor in graph[current]:
+            in_degree[neighbor] -= 1
+            runtime[neighbor] = max(
+                runtime[neighbor],
+                runtime[current] + tasks[neighbor]["duration"]
+            )
+            if in_degree[neighbor] == 0:
+                queue.append(neighbor)
+
+    if processed != len(tasks):
+        raise ValueError("Loop in task list")
+
+    return max(runtime.values())
 
 def create_tasks(filepath):
 
@@ -28,7 +65,9 @@ def create_tasks(filepath):
                 "duration": duration,
                 "dependencies": dependencies
             }
-    pprint.pprint(tasks)
+    
+    #For debug
+    #pprint.pprint(tasks)
     return tasks
 
 def main():
