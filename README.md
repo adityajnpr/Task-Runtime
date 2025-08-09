@@ -18,7 +18,7 @@ There are 2 approaches that can be used:
 * DFS Search
 * Kahn's algorithm
 
-Choice of implementation was based on simplicity of the code and easier to explain during
+Choice of implementation was based on simplicity of the code and ease of explaination during
 the interview :)
 
 # Code Flow
