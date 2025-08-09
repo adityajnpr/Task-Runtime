@@ -13,8 +13,16 @@ Include a second option to run the tasks and determine the difference in the act
 runtime versus the expected runtime.
 
 # Solution Approach
+The solution key is the figure out this is a directed graph issue with topological sort.
+There are 2 approaches that can be used:
+-DFS Search
+-Kahn's algorithm
+Choice of implementation was based on simplicity of the code and easier to explain during
+the interview :)
 
 # Code Flow
+<img width="805" height="413" alt="image" src="https://github.com/user-attachments/assets/380b16f0-5313-47a9-86a9-88d046eaa64d" />
+
 
 # Function Details
 
