@@ -15,8 +15,8 @@ runtime versus the expected runtime.
 # Solution Approach
 The solution key is the figure out this is a directed graph issue with topological sort.
 There are 2 approaches that can be used:
--DFS Search
--Kahn's algorithm
+* DFS Search
+* Kahn's algorithm
 Choice of implementation was based on simplicity of the code and easier to explain during
 the interview :)
 
