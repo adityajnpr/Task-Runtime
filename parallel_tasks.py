@@ -4,6 +4,31 @@ import time
 from collections import defaultdict, deque
 import pprint
 
+def execute_single_task(task_name, task, events):
+
+    for dep in task["dependencies"]:
+        events[dep].wait()
+
+    print(f"Starting Task {task_name}:- duration: {task['duration']}s")
+    time.sleep(task["duration"])
+    print(f"Finished  Task {task_name}")
+
+    events[task_name].set()
+
+
+def execute_all_tasks(tasks):
+
+    events = {name: threading.Event() for name in tasks}
+    threads = []
+
+    for name, task in tasks.items():
+        t = threading.Thread(target=execute_single_task, args=(name, task, events))
+        threads.append(t)
+        t.start()
+
+    for t in threads:
+        t.join()
+
 # Attribution: https://www.geeksforgeeks.org/dsa/topological-sorting-indegree-based-solution/
 def toposort_tasks(tasks):
 
@@ -85,6 +110,21 @@ def main():
         except Exception as e:
             print(f"Error: {e}")
             return
+    if args.execute:
+        try:
+            tasks = create_tasks(args.filename)
+            expected_runtime = toposort_tasks(tasks)
+        except Exception as e:
+            print(f"Error: {e}")
+            return
+
+        print(f"Expected runtime: {expected_runtime} seconds")
+        print("\n Executing tasks \n")
+        start_time = time.time()
+        execute_all_tasks(tasks)
+        elapsed_time = time.time() - start_time
+        print(f"Actual runtime: {elapsed_time} seconds")
+        print(f"Deviation from expected runtime: {elapsed_time - expected_runtime} seconds")
 
 if __name__ == "__main__":
     main()
