@@ -25,8 +25,6 @@ the interview :)
 <img width="805" height="413" alt="image" src="https://github.com/user-attachments/assets/380b16f0-5313-47a9-86a9-88d046eaa64d" />
 
 
-# Function Details
-
 # Instructions for User
 
 
