@@ -28,16 +28,25 @@ the interview :)
 
 # Instructions for User
 ## Downloading Files
-From the github page download files directly on your laptop by clicking the green code button on the page.
+
+From the github page, download files directly on your laptop by clicking the green code button on the page.
 Alternative execute the github cli to clone the repo:
+
 ```gh repo clone adityajnpr/Task-Runtime```
+
 ### Executing the script
 Validate option:
+
 ``` python3 parallel_tasks.py tasks.txt --validate ```
+
 Execute option:
+
 ```python3 parallel_tasks.py tasks.txt --execute```
+
 User can also modify the tasks.txt file to try different scenerios
+
 ### Running unit test module
+
 ```python3 -m unittest test_parallel_tasks.py  ```
 
 
