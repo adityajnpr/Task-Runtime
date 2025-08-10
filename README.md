@@ -13,7 +13,8 @@ Include a second option to run the tasks and determine the difference in the act
 runtime versus the expected runtime.
 
 # Solution Approach
-The solution key is the figure out this is a directed graph issue with topological sort.
+The solution key is to figure out this is a directed graph problem with topological sort.
+This elements are topologically sorted, the graph can be traversed to find the max interval.
 There are 2 approaches that can be used:
 * DFS Search
 * Kahn's algorithm
