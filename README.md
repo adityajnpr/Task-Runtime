@@ -27,5 +27,9 @@ the interview :)
 
 
 # Instructions for User
+## Downloading Files
+From the github page download files directly on your laptop by clicking the green code button on the page.
+Alternative execute the github cli:
+```
 
 
