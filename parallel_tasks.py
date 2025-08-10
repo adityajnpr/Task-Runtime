@@ -75,16 +75,25 @@ def create_tasks(filepath):
     with open(filepath, "r") as file:
         for line in file:
             line = line.strip()
-            if not line:
+            if not line or line.startswith("#"):
                 continue
 
             name, duration_str, deps_str = line.split(",",2)
+            if not name:
+            	raise ValueError("Task name can't be empty")
             name = name.strip()
-            duration = int(duration_str.strip())
+            try:
+            	duration = int(duration_str.strip())
+            except ValueError:
+            	raise ValueError(f"Duration is invalid")
 
             dependencies = eval(deps_str.strip())
             if not isinstance(dependencies, list):
                 raise TypeError("Dependencies should be a list")
+            
+            for d in dependencies:
+                if not isinstance(d,str):
+                	raise TypeError("Dependency must be a string ")
 
             tasks[name] = {
                 "duration": duration,
